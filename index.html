@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRG | Premium Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --royal-blue: #001f3f;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #001f3f 0%, #000 100%);
+        }
+
+        /* FLOATING IMAGE LOGO CONTAINER */
+        .floating-logo-wrapper {
+            position: absolute;
+            top: 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: masterFloat 5s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .logo-img {
+            width: 120px; /* Adjust size as needed */
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+            margin-bottom: 10px;
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            letter-spacing: 4px;
+            font-size: 14px;
+            text-shadow: var(--glow);
+        }
+
+        @keyframes masterFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        /* LOGIN CONSOLE */
+        .terminal-box {
+            width: 380px;
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 15px;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            outline: none;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .btn-access {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #d4af37, #b8860b);
+            border: none;
+            color: black;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-access:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ASSISTANT TOOLBAR */
+        .assistant-bar {
+            position: fixed;
+            bottom: 40px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .assistant-bar:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+        }
+
+        .ai-status {
+            width: 10px; height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-logo-wrapper">
+        <img src="logo.png" alt="FRG Logo" class="logo-img">
+        <div class="brand-name">FELICITY RUDRAxGARG</div>
+    </div>
+
+    <div class="terminal-box">
+        <h2 style="font-family: 'Cinzel'; color: var(--gold); margin-top: 0;">Identity Required</h2>
+        <input type="text" id="empId" placeholder="ENTER ID">
+        <button class="btn-access" onclick="checkId()">SECURE LOGIN</button>
+        <p id="err" style="color: #ff4b5c; font-size: 10px; display: none; margin-top: 10px;">DENIED: ID NOT RECOGNIZED</p>
+    </div>
+
+    <div class="assistant-bar" onclick="location.href='assistant.html'">
+        <div class="ai-status"></div>
+        <span style="font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px;">Ask Digital Assistant</span>
+    </div>
+
+    <script>
+        function checkId() {
+            const val = document.getElementById('empId').value;
+            if(val === "103" || val === "1211") {
+                window.location.href = val + ".html";
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

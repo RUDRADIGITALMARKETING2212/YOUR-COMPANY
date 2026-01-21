@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anand Singh - Premium Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #001f3f; /* Royal Blue */
+            --accent-gold: #d4af37;  /* Gold */
+            --glass-white: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: radial-gradient(circle at top right, #1e3c72, #001f3f, #000);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            color: var(--accent-gold);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before { left: 100%; }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        h3 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.4rem; }
+
+        .icon-box {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--accent-gold), #b8860b);
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        button:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px var(--accent-gold);
+        }
+
+        textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            padding: 12px;
+            box-sizing: border-box;
+            resize: none;
+            outline: none;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 0.9rem;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logout-container { margin-top: 50px; }
+        .logout-btn {
+            background: transparent;
+            border: 2px solid #ff4b5c;
+            color: #ff4b5c;
+            width: auto;
+            padding: 10px 40px;
+        }
+        .logout-btn:hover { background: #ff4b5c; color: white; }
+
+        #salary-result {
+            font-size: 1.5rem;
+            color: #00ff88;
+            margin-top: 15px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        .company-card{
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 25px;
+    border: 1px solid rgba(212,175,55,0.3);
+}
+
+.company-card a{
+    display:inline-block;
+    margin-top:15px;
+    color:#000;
+    background:#d4af37;
+    padding:10px 25px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Executive Dashboard</h1>
+
+    <div class="container">
+        <div class="card">
+            <h3>Identity</h3>
+            <div class="icon-box">
+                <img src="NHIKHIL PRAJAPTI.jpeg" width="60">
+            </div>
+            <p><strong>Name:</strong> NHIKHIL PRAJAPTI</p>
+            <p><strong>Employee ID:</strong> 1211</p>
+            <p><strong>Base Rate:</strong> COSTUMER BASED</p>
+        </div>
+
+        <div class="card">
+            <h3>Attendance</h3>
+            <button onclick="markAttendance()">Verify Attendance</button>
+            <div id="attList">No logs found.</div>
+        </div>
+
+        <div class="card">
+            <h3>Operations</h3>
+            <textarea id="work" placeholder="Log daily digital tasks..."></textarea>
+            <button onclick="submitWork()">Update Progress</button>
+            <div id="perfList">No updates found.</div>
+        </div>
+
+        <div class="card">
+            <h3>Finance</h3>
+            <button onclick="calculateSalary()">Generate Report</button>
+            <div id="salary-result"></div>
+        </div>
+    </div>
+
+    <div class="logout-container">
+        <button class="logout-btn" onclick="logout()">Secure Logout</button>
+    </div>
+
+<script>
+    const empId = "103";
+    let attendance = JSON.parse(localStorage.getItem("attendance_"+empId) || "[]");
+    let performance = JSON.parse(localStorage.getItem("performance_"+empId) || "[]");
+
+    function markAttendance(){
+        let today = new Date().toLocaleDateString();
+        if(attendance.find(a=>a.date===today)){
+            alert("Security Check: Attendance already logged for today.");
+            return;
+        }
+        attendance.push({date: today, status:"Active"});
+        localStorage.setItem("attendance_"+empId, JSON.stringify(attendance));
+        renderUI();
+    }
+
+    function submitWork(){
+        let workText = document.getElementById("work").value.trim();
+        if(!workText) return alert("Please enter work details.");
+        performance.push({date: new Date().toLocaleDateString(), work: workText});
+        localStorage.setItem("performance_"+empId, JSON.stringify(performance));
+        document.getElementById("work").value = "";
+        renderUI();
+    }
+
+    function calculateSalary(){
+        let total = attendance.length * 700;
+        document.getElementById("salary-result").innerHTML = `₹${total}`;
+    }
+
+    function renderUI(){
+        document.getElementById("attList").innerHTML = attendance.length === 0 ? "Empty" : 
+            `<ul>${attendance.map(a=>`<li>📅 ${a.date} - ${a.status}</li>`).join("")}</ul>`;
+        
+        document.getElementById("perfList").innerHTML = performance.length === 0 ? "Empty" : 
+            `<ul>${performance.map(p=>`<li>🚀 ${p.date}: ${p.work}</li>`).join("")}</ul>`;
+    }
+
+    function logout(){
+        if(confirm("Are you sure you want to end your session?")) {
+            window.location.href = "login.html"; 
+        }
+    }
+
+    renderUI(); // Initial load
+
+</script>
+<div class="company-card">
+   <h3>🏢 Company Profile</h3>
+   <p>Know more about FELICITY RUDRAxGARG</p>
+   <a href="about.html">View About Company</a>
+</div>
+
+</body>
+</html>
